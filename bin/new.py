@@ -73,7 +73,7 @@ def get_args() -> Args:
 
 # --------------------------------------------------
 def main() -> None:
-    """Make a jazz noise here"""
+    """Start doing stuff."""
 
     args = get_args()
     program = args.program
@@ -150,7 +150,7 @@ def get_args():
 
 # --------------------------------------------------
 def main():
-    \"\"\"Make a jazz noise here\"\"\"
+    \"\"\"Start doing stuff here.\"\"\"
 
     args = get_args()
     str_arg = args.arg
