@@ -18,8 +18,14 @@ def get_args():
     )
 
     parser.add_argument("word", metavar="word", help="A word")
+    parser.add_argument("-s", "--starboard",
+                        help="Switch to the starboard bow", action="store_true")
 
-    return parser.parse_args()
+    args = parser.parse_args()
+    if not args.word[0].isalpha():
+        parser.error(f"name {args.word} must start with letter")
+
+    return args
 
 
 # --------------------------------------------------
@@ -29,7 +35,11 @@ def main():
     args = get_args()
     word = args.word
     article = "an" if word[0].lower() in "aeiou" else "a"
-    print(f"Ahoy, Captain, {article} {word} " f"off the larboard bow!")
+    if word[0].isupper():
+        article = article.title()
+    which_bow = "starboard" if args.starboard else "larboard"
+    print(f"Ahoy, Captain, {article} {word} "
+          f"off the {which_bow} bow!")
 
 
 # --------------------------------------------------
