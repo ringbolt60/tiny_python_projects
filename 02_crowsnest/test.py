@@ -13,8 +13,8 @@ consonant_words = [
 ]
 vowel_words = ['aviso', 'eel', 'iceberg', 'octopus', 'upbound']
 disallowed_words = ['7haret', '_tresd', '!aargh', '2@!']
-larboard_template = 'Ahoy, Captain, {} {} off the larboard bow!'
-starboard_template = 'Ahoy, Captain, {} {} off the starboard bow!'
+template = 'Ahoy, Captain, {} {} off the {} bow!'
+
 
 
 # --------------------------------------------------
@@ -40,7 +40,7 @@ def test_consonant():
 
     for word in consonant_words:
         out = getoutput(f'{prg} {word}')
-        assert out.strip() == larboard_template.format('a', word)
+        assert out.strip() == template.format('a', word, "larboard")
 
 
 # --------------------------------------------------
@@ -49,7 +49,7 @@ def test_consonant_upper():
 
     for word in consonant_words:
         out = getoutput(f'{prg} {word.title()}')
-        assert out.strip() == larboard_template.format('A', word.title())
+        assert out.strip() == template.format('A', word.title(), "larboard")
 
 
 # --------------------------------------------------
@@ -58,7 +58,7 @@ def test_vowel():
 
     for word in vowel_words:
         out = getoutput(f'{prg} {word}')
-        assert out.strip() == larboard_template.format('an', word)
+        assert out.strip() == template.format('an', word, "larboard")
 
 
 # --------------------------------------------------
@@ -66,8 +66,8 @@ def test_vowel_upper():
     """octopus -> an Octopus"""
 
     for word in vowel_words:
-        out = getoutput(f'{prg} {word.upper()}')
-        assert out.strip() == larboard_template.format('An', word.upper())
+        out = getoutput(f'{prg} {word.title()}')
+        assert out.strip() == template.format('An', word.title(), "larboard")
 
 
 # --------------------------------------------------
@@ -77,7 +77,7 @@ def test_vowel_case_agreement():
     for word in vowel_words:
         cap_word = word.title()
         out = getoutput(f'{prg} {cap_word}')
-        assert out.strip() == larboard_template.format('An', cap_word)
+        assert out.strip() == template.format('An', cap_word, "larboard")
 
 
 # --------------------------------------------------
@@ -87,7 +87,7 @@ def test_consonant_case_agreement():
     for word in consonant_words:
         cap_word = word.title()
         out = getoutput(f'{prg} {cap_word}')
-        assert out.strip() == larboard_template.format('A', cap_word)
+        assert out.strip() == template.format('A', cap_word, "larboard")
 
 
 # --------------------------------------------------
@@ -96,7 +96,7 @@ def test_starboard_flag():
 
     for word in consonant_words:
         out = getoutput(f'{prg} {word} -s')
-        assert out.strip() == starboard_template.format('a', word)
+        assert out.strip() == template.format('a', word, "starboard")
 
 
 # --------------------------------------------------
@@ -105,7 +105,7 @@ def test_starboard_flag_full():
 
     for word in consonant_words:
         out = getoutput(f'{prg} {word} --starboard')
-        assert out.strip() == starboard_template.format('a', word)
+        assert out.strip() == template.format('a', word, "starboard")
 
 
 # --------------------------------------------------
