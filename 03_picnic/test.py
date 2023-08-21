@@ -65,19 +65,21 @@ def test_more_than_two_sorted():
     """more than two items sorted output"""
 
     arg = "bananas apples dates cherries"
-    out = getoutput(f"{prg} {arg} --sorted")
-    expected = "You are bringing apples, bananas, cherries, and dates."
-    assert out.strip() == expected
+    for flag in ["-s", "--sorted"]:
+        out = getoutput(f"{prg} {arg} {flag}")
+        expected = "You are bringing apples, bananas, cherries, and dates."
+        assert out.strip() == expected
 
 
 # --------------------------------------------------
 def test_no_oxford_comma():
     """no Oxford comma if -o switch made"""
 
-    arg = "bananas apples dates cherries"
-    out = getoutput(f"{prg} {arg} -o -s")
-    expected = "You are bringing apples, bananas, cherries and dates."
-    assert out.strip() == expected
+    arg = "apples bananas cherries dates"
+    for flag in ["-o", "--no_oxford"]:
+        out = getoutput(f"{prg} {arg} {flag}")
+        expected = "You are bringing apples, bananas, cherries and dates."
+        assert out.strip() == expected
 
 
 # --------------------------------------------------
@@ -96,9 +98,6 @@ def test_custom_seperator():
 def test_invalid_separator_input():
     """Only , ; : - should be used as separators"""
 
-    for sep in ",;:-":
-        pass
-    else:
-        for sep in "".join((string.ascii_letters, string.digits)):
-            out = getoutput(f"{prg} jam -S {sep}")
-            assert f"error: {sep} not a valid separator" in out.strip()
+    for sep in "".join((string.ascii_letters, string.digits)):
+        out = getoutput(f"{prg} jam -S {sep}")
+        assert f"error: {sep} not a valid separator" in out.strip()
