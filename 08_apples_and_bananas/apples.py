@@ -28,7 +28,7 @@ def get_args():
         metavar="CHAR",
         type=str,
         default="a",
-        choices=list('aeiou'),
+        choices=list("aeiou"),
     )
 
     args = parser.parse_args()
@@ -46,15 +46,15 @@ def main():
     """Start doing stuff here."""
 
     args = get_args()
-    lookup = {}
-    for vowel in "aeiou":
-        lookup[vowel] = args.vowel
-    for vowel in "AEIOU":
-        lookup[vowel] = args.vowel.upper()
-    output = args.text.translate(str.maketrans(lookup))
+    vowel = args.vowel
+
+    def new_char(c):
+        return vowel if c in "aeiou" else vowel.upper() if c in "AEIOU" else c
+
+    output = "".join(map(new_char, args.text))
     final_out = output[0]
     for n, char in enumerate(output[1:]):
-        if char == output[n] and char in 'aeiouAEIOU':
+        if char == output[n] and char in "aeiouAEIOU":
             pass
         else:
             final_out += char
