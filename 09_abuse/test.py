@@ -131,3 +131,24 @@ def random_string():
     """generate a random filename"""
 
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=5))
+
+# --------------------------------------------------
+def test_adjectives_from_file():
+    """ list of adjectives correct"""
+
+    out = getoutput(f'{prg} --seed 4 --number 2 --adjectives 4 --adjective_file "./data/adjectives.txt"')
+    expected = """
+You infected, lecherous, dishonest, rotten recreant!
+You filthy, detestable, cullionly, base lunatic!
+""".strip()
+    assert out.strip() == expected
+
+def test_nouns_from_file():
+    """ list of adjectives correct"""
+
+    out = getoutput(f'{prg} --seed 4 --number 2 --adjectives 4 --noun_file "./data/nouns.txt"')
+    expected = """
+You infected, lecherous, dishonest, rotten recreant!
+You filthy, detestable, cullionly, base lunatic!
+""".strip()
+    assert out.strip() == expected
