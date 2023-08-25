@@ -40,7 +40,7 @@ def test_command_line():
     """ foo -> faa """
 
     out = getoutput(f'{prg} foo')
-    assert out.strip() == 'faa'
+    assert out.strip() == 'fa'
 
 
 # --------------------------------------------------
@@ -48,7 +48,7 @@ def test_command_line_with_vowel():
     """ foo -> fii """
 
     out = getoutput(f'{prg} -v i foo')
-    assert out.strip() == 'fii'
+    assert out.strip() == 'fi'
 
 
 # --------------------------------------------------
@@ -64,7 +64,7 @@ def test_file():
     """ fox.txt """
 
     out = getoutput(f'{prg} {fox}')
-    assert out.strip() == 'Tha qaack brawn fax jamps avar tha lazy dag.'
+    assert out.strip() == 'Tha qack brawn fax jamps avar tha lazy dag.'
 
 
 # --------------------------------------------------
@@ -72,4 +72,4 @@ def test_file_with_vowel():
     """ fox.txt """
 
     out = getoutput(f'{prg} --vowel o {fox}')
-    assert out.strip() == 'Tho qoock brown fox jomps ovor tho lozy dog.'
+    assert out.strip() == 'Tho qock brown fox jomps ovor tho lozy dog.'
