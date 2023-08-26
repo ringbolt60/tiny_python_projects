@@ -35,7 +35,7 @@ def test_bad_int():
     bad = random.randint(-10, 1)
     rv, out = getstatusoutput(f'{prg} -n {bad}')
     assert rv != 0
-    assert re.search(f'--num "{bad}" must be greater than 0', out)
+    assert re.search(f'--num "{bad}" must be between 1 and 12 inclusive', out)
 
 
 # --------------------------------------------------
@@ -62,10 +62,10 @@ def test_str():
 def test_one():
     """One bottle of beer"""
 
-    expected = ('1 bottle of beer on the wall,\n'
-                '1 bottle of beer,\n'
-                'Take one down, pass it around,\n'
-                'No more bottles of beer on the wall!')
+    expected = ('One green bottle standing on the wall,\n'
+                'One green bottle standing on the wall,\n'
+                'And if one green bottle should accidentally fall,\n'
+                "There'd be no green bottles standing on the wall!")
 
     rv, out = getstatusoutput(f'{prg} --num 1')
     assert rv == 0
@@ -76,14 +76,14 @@ def test_one():
 def test_two():
     """Two bottles of beer"""
 
-    expected = ('2 bottles of beer on the wall,\n'
-                '2 bottles of beer,\n'
-                'Take one down, pass it around,\n'
-                '1 bottle of beer on the wall!\n\n'
-                '1 bottle of beer on the wall,\n'
-                '1 bottle of beer,\n'
-                'Take one down, pass it around,\n'
-                'No more bottles of beer on the wall!')
+    expected = ('Two green bottles standing on the wall,\n'
+                'Two green bottles standing on the wall,\n'
+                'And if one green bottle should accidentally fall,\n'
+                "There'd be one green bottle standing on the wall!\n\n"
+                'One green bottle standing on the wall,\n'
+                'One green bottle standing on the wall,\n'
+                'And if one green bottle should accidentally fall,\n'
+                "There'd be no green bottles standing on the wall!")
 
     rv, out = getstatusoutput(f'{prg} -n 2')
     assert rv == 0
